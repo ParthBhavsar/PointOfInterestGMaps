@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PointOfInterestGMaps</string>
+    <string name="google_maps_api_key">AIzaSyAgSwK6WQvqmgetsknPW7TuzC1v2KLLHVg</string>
+
+
+
 </resources>
