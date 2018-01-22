@@ -1,29 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context="io.zeroxp.pointofinterestgmaps.MapActivity"
+    app:umanoPanelHeight="50dp"
+    app:umanoShadowHeight="10dp"
+    android:gravity="bottom">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/mapView">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/device_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_device_location"
-        android:layout_margin="16dp"
-        android:backgroundTint="#FFF"
-        app:borderWidth="0dp"
-        android:elevation="6dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="gotoDeviceLocation"/>
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/device_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_device_location"
+            android:layout_margin="16dp"
+            android:backgroundTint="#FFF"
+            app:borderWidth="0dp"
+            android:elevation="6dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:onClick="gotoDeviceLocation"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/start_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/device_location"
+            android:layout_alignStart="@+id/device_location"
+            android:backgroundTint="#FFF"
+            android:elevation="6dp"
+            android:onClick="startDirection"
+            android:src="@drawable/ic_local_shipping"
+            app:borderWidth="0dp" />
+
+    </RelativeLayout>
 
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView">
+
+
+        <DatePicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></DatePicker>
+
+    </RelativeLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
