@@ -2,6 +2,7 @@ package io.zeroxp.pointofinterestgmaps;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -60,10 +61,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final String TAG = "MapActivity";
 
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String CHANGE_TAB_COLOR_BROADCAST_ACTION = "io.zeroxp.pointofinterestgmaps.CHANGE_TAB_COLOR";
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 13.80f;
 
+    private boolean changeTabColor = false;
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
@@ -241,19 +244,32 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
 
-    private void enableImmersiveMode()
+    public void broadcastChangeTabColor(View view)
     {
+        Intent changeTabColorIntent = new Intent();
 
+        if (changeTabColor)
+        {
+            changeTabColorIntent.putExtra("changeTabColor",false);
+            changeTabColor = false;
+        }
+
+        else
+        {
+            changeTabColorIntent.putExtra("changeTabColor",true);
+            changeTabColor = true;
+
+        }
+        changeTabColorIntent.setAction(CHANGE_TAB_COLOR_BROADCAST_ACTION);
+        changeTabColorIntent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        sendBroadcast(changeTabColorIntent);
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         setContentView(R.layout.activity_map);
-
-
         getLocationPermission();
     }
 

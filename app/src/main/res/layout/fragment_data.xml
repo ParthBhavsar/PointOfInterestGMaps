@@ -21,6 +21,8 @@
         app:tabGravity="fill"
         />
 
+
+
     <io.zeroxp.pointofinterestgmaps.DataCustomViewPager
         android:id="@+id/viewPager_Data"
         android:layout_width="match_parent"

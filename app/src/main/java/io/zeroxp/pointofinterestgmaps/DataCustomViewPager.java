@@ -46,7 +46,7 @@ public class DataCustomViewPager extends ViewPager {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         // Never allow swiping to switch between pages
-        
+
         if (this.enabled)
         {
             return super.onInterceptTouchEvent(ev);
