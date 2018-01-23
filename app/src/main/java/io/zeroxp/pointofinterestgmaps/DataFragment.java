@@ -44,12 +44,14 @@ public class DataFragment extends Fragment {
         dataPagerAdapter = new DataPagerAdapter(getChildFragmentManager());
         dataPagerAdapter.addFragment(new DataAFragment(), "A");
         dataPagerAdapter.addFragment(new DataBFragment(), "B");
+        Log.e("DataFragment", "setDataViewPager");
         dataViewPager.setAdapter(dataPagerAdapter);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_data, container, false);
 
@@ -86,8 +88,8 @@ public class DataFragment extends Fragment {
             Log.e("ChangeTabColor", "StopAnimation");
 //            tabsContainer.getChildAt(0).setBackgroundColor(Color.parseColor("#FFFFFF"));
 //            tabsContainer.getChildAt(1).setBackgroundColor(Color.parseColor("#FFFFFF"));
-            stopAnimatingTabColor(tabsContainer.getChildAt(0), Color.parseColor("#FFFFFF"), Color.parseColor("#FFFFFF"));
-            stopAnimatingTabColor(tabsContainer.getChildAt(1), Color.parseColor("#FFFFFF"), Color.parseColor("#FFFFFF"));
+            stopAnimatingTabColor(tabsContainer.getChildAt(0), Color.parseColor("#C8E6C9"), Color.parseColor("#C8E6C9"));
+            stopAnimatingTabColor(tabsContainer.getChildAt(1), Color.parseColor("#C8E6C9"), Color.parseColor("#C8E6C9"));
 
         }
     }
@@ -103,6 +105,7 @@ public class DataFragment extends Fragment {
         valueAnimator.setRepeatCount(ValueAnimator.INFINITE); //repeats the animation infinitely
         valueAnimator.start();
     }
+
 
     private void stopAnimatingTabColor(View tabsContainer, int colorStart, int colorEnd)
     {
@@ -126,15 +129,26 @@ public class DataFragment extends Fragment {
         }
     }
 
+    ChangeTabColorBroadcastReceiver changeTabColorBroadcastReceiver;
 
     @Override
     public void onResume() {
         super.onResume();
         String CHANGE_TAB_COLOR_BROADCAST_ACTION = "io.zeroxp.pointofinterestgmaps.CHANGE_TAB_COLOR";
 
+        //Register broadcastReceiver
         IntentFilter filter = new IntentFilter(CHANGE_TAB_COLOR_BROADCAST_ACTION);
-        ChangeTabColorBroadcastReceiver changeTabColorBroadcastReceiver = new ChangeTabColorBroadcastReceiver();
+        changeTabColorBroadcastReceiver = new ChangeTabColorBroadcastReceiver();
         getActivity().registerReceiver(changeTabColorBroadcastReceiver, filter);
+
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //unRegister the broadcastReceiver
+        getContext().unregisterReceiver(changeTabColorBroadcastReceiver);
 
     }
 }
