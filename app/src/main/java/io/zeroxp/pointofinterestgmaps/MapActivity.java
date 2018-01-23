@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -230,6 +232,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY // hide status bar and nav bar after a short delay, or if the user interacts with the middle of the screen
         );
+
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.title_fragment, new DataFragment()).commit();
     }
 
 
@@ -246,48 +253,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         setContentView(R.layout.activity_map);
 
-//        View mapView = findViewById(R.id.mapView);
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            Window w = getWindow();
-//            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//            if (mapView != null) {
-//                mapView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//            }
-//        }
-
-
-
-//        mDecorView = getWindow().getDecorView();
-//
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            hideSystemUI();
-//        }
 
         getLocationPermission();
     }
 
-//    private void hideSystemUI() {
-//        // Set the IMMERSIVE flag.
-//        // Set the content to appear under the system bars so that the content
-//        // doesn't resize when the system bars hide and show.
-//        mDecorView.setSystemUiVisibility(
-//                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-//                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-//                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
-//    }
-//
-//
-//    @Override
-//    public void onWindowFocusChanged(boolean hasFocus) {
-//        super.onWindowFocusChanged(hasFocus);
-//        if (hasFocus) {
-//            hideSystemUI();
-//        }
-//    }
 
 
 
